@@ -13,10 +13,7 @@ class Snake(object):
     
     # Constructor
     def __init__(self):
-        self.segments = []
-        for i in range(SIZE):
-            self.grow()
-        self.head = self.segments[0]
+        self.initialize_snake()
 
     # Check collision with tail
     def is_collided(self):
@@ -33,7 +30,7 @@ class Snake(object):
             last_segment = self.segments[-1]
             x = last_segment.xcor()
             y = last_segment.ycor()
-            
+
         # New segment
         snake_part = turtle.Turtle()
         snake_part.penup()
@@ -70,3 +67,20 @@ class Snake(object):
     def right(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
+
+    # Initializes starting snake
+    def initialize_snake(self):
+        self.segments = []
+        for i in range(SIZE):
+            self.grow()
+        self.head = self.segments[0]
+
+    # Resets snake
+    def reset(self):
+        # Remove turtles
+        for i in range(0, len(self.segments)):
+            self.segments[i].reset()
+
+        # Initialize new snake
+        self.initialize_snake()
+        

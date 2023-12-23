@@ -28,9 +28,9 @@ screen.onkey(snake.down, "s")
 screen.onkey(snake.left, "a")
 screen.onkey(snake.right, "d")
 
-def game_over():
-    game_over_turtle = Scoreboard(x=0, y=0)
-    game_over_turtle.write_message("Game Over")
+def reset():
+    scoreboard.reset()
+    snake.reset() 
 
 # Game loop
 while True:
@@ -47,12 +47,10 @@ while True:
     
     # Check for collision with wall
     if snake.head.xcor() > WIDTH/2 or snake.head.xcor() < -WIDTH/2 or snake.head.ycor() > HEIGHT/2 or snake.head.ycor() < -HEIGHT/2:
-        game_over()
-        break
+        reset()
 
     # Check snake collision
     if snake.is_collided():
-        game_over()
-        break
+        reset()
 
 screen.exitonclick()
